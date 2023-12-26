@@ -10,8 +10,9 @@ public:
   /**
    * @param origin Initial values of Creal, Cimag, Zreal and Zimag,
    * @param size   Size of the 4D space for Creal, Cimag, Zreal and Zimag
-   * @param dimensions No. of dims in 3D space. The 4D space will be projected on to a 3D space for visualization.
-   * @param projectionAxes Map the 4D space indices into 3D space.
+   * @param dimensions No. of dims in 3D space. The 4D space will be projected
+   *                   on to a 3D space for visualization.
+   * @param projectionAxes Map the 4D space indices into 3D x-y-z space used for visualization.
    *                       0: Creal, 1: Cimag, 2: Zreal, 3: Zimag
    */
   Mandelbrot(std::array<double, 4> origin, std::array<double, 4> size,

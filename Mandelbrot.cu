@@ -25,10 +25,24 @@ Mandelbrot::Mandelbrot(std::array<double, 4> origin, std::array<double, 4> size,
   std::size_t numPoints = dimensions[0] * dimensions[1] * dimensions[2];
   CHECKED_CUDA_INVOKE(cudaStreamCreate(&this->IterationStream));
   CHECKED_CUDA_INVOKE(cudaMallocAsync(&this->Iterations, numPoints * sizeof(double), this->IterationStream));
+  // Default 0.01 spacing in each dimension.
   std::fill(this->Spacings.begin(), this->Spacings.end(), 0.01);
+  // For different projection axes, recompute spacings.
+  if ((this->ProjectionAxes[0] != 0) || 
+      (this->ProjectionAxes[1] != 1) ||
+      (this->ProjectionAxes[2] != 2))
+  {
+    for (int idx = 0; idx < 3; ++idx)
+    {
+      const auto& length = this->Dimensions[idx];
+      const auto& axis = this->ProjectionAxes[idx];
+      this->Spacings[axis] = this->Size[axis] / length;
+    }
+  }
 }
 
-Mandelbrot::~Mandelbrot() {
+Mandelbrot::~Mandelbrot()
+{
   if (this->Iterations != nullptr)
   {
     CHECKED_CUDA_INVOKE(cudaFree(this->Iterations));
