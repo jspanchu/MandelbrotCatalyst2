@@ -4,7 +4,7 @@ Evaluate a mandelbrot set using CUDA and visualize each iteration with ParaView 
 Consider the equation `Z = Z^2 + C`, in the 4D space made up of `Creal`, `Cimag`, `Zreal` and `Zimag`,
 this visualization maps the x-axis to `Creal`, y-axis to `Cimag` and z-axis to `Zimag`.
 
-![Mandelbrot visualization](image.png)
+![Mandelbrot visualization](screenshot.png)
 
 ## Build
 
